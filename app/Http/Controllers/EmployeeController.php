@@ -17,7 +17,7 @@ class EmployeeController extends Controller
     public function index()
     {
         $employees = Employee::with('person')->paginate(10);
-        return view('employee.index', compact('employees'));
+        return view('Employee.index', compact('employees'));
     }
 
     /**
@@ -26,7 +26,7 @@ class EmployeeController extends Controller
     public function create()
     {
         $persons = Person::all(); // Fetch all persons
-        return view('employee.create', compact('persons'));
+        return view('Employee.create', compact('persons'));
     }
 
 
@@ -78,7 +78,7 @@ class EmployeeController extends Controller
         // Get all persons for the dropdown
         $persons = Person::all();
 
-        return view('employee.show', compact('employee', 'persons'));
+        return view('Employee.show', compact('employee', 'persons'));
     }
 
     /**
@@ -87,7 +87,7 @@ class EmployeeController extends Controller
     public function edit(Employee $employee)
     {
         $persons = Person::pluck('name', 'id');
-        return view('employees.edit', compact('employee', 'persons'));
+        return view('Employee.edit', compact('employee', 'persons'));
     }
 
     /**

@@ -15,7 +15,7 @@ class InvoiceController extends Controller
     public function index()
     {
         $invoices = Invoice::paginate(12);
-        return view('invoice.index', compact('invoices'));
+        return view('Invoice.index', compact('invoices'));
     }
 
     /**
@@ -26,7 +26,7 @@ class InvoiceController extends Controller
         $invoice = Invoice::findOrFail($id);
         $patient = $invoice->patient; // Relatie gebruiken
 
-        return view('invoice.show', compact('invoice', 'patient'));
+        return view('Invoice.show', compact('invoice', 'patient'));
     }
 
     /**
@@ -42,7 +42,7 @@ class InvoiceController extends Controller
         $treatments = Treatment::all();
         $treatmentTypes = Treatment::distinct()->pluck('treatment_type');
 
-        return view('invoice.create', compact('patients', 'treatments', 'treatmentTypes', 'newNumber'));
+        return view('Invoice.create', compact('patients', 'treatments', 'treatmentTypes', 'newNumber'));
     }
 
     /**
@@ -92,7 +92,7 @@ class InvoiceController extends Controller
         $treatments = Treatment::all();
         $treatmentTypes = Treatment::distinct()->pluck('treatment_type');
 
-        return view('invoice.edit', compact('invoice', 'patients', 'treatments', 'treatmentTypes'));
+        return view('Invoice.edit', compact('invoice', 'patients', 'treatments', 'treatmentTypes'));
     }
 
     /**
