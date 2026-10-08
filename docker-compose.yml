@@ -1,49 +1,55 @@
 name: smilepro
 
 services:
-  app:
-    build: .
-    image: smilepro:latest
-    container_name: smilepro-app
-    restart: unless-stopped
-    depends_on:
-      - db
-    ports:
-      - "${APP_PORT:-8080}:80"
-    environment:
-      APP_NAME: SmilePro
-      APP_ENV: production
-      APP_DEBUG: "false"
-      APP_URL: ${APP_URL:-http://localhost:8080}
-      APP_KEY: ${APP_KEY:-}
-      APP_TIMEZONE: Europe/Amsterdam
-      APP_LOCALE: nl
-      LOG_CHANNEL: stderr
-      DB_CONNECTION: mysql
-      DB_HOST: db
-      DB_PORT: 3306
-      DB_DATABASE: smilepro
-      DB_USERNAME: smilepro
-      DB_PASSWORD: ${DB_PASSWORD:-smilepro_secret}
-      SESSION_DRIVER: database
-      CACHE_STORE: database
-      QUEUE_CONNECTION: database
-      SEED_ON_FIRST_RUN: "true"
-    volumes:
-      - smilepro_storage:/var/www/html/storage
+    app:
+        build: .
+        image: smilepro:latest
+        container_name: smilepro-app
+        restart: unless-stopped
+        depends_on:
+            - db
+        networks:
+            - default
+            - npm_network
+        environment:
+            APP_NAME: SmilePro
+            APP_ENV: production
+            APP_DEBUG: "false"
+            APP_URL: ${APP_URL:-http://localhost:8080}
+            APP_KEY: ${APP_KEY:-}
+            APP_TIMEZONE: Europe/Amsterdam
+            APP_LOCALE: nl
+            LOG_CHANNEL: stderr
+            DB_CONNECTION: mysql
+            DB_HOST: db
+            DB_PORT: 3306
+            DB_DATABASE: smilepro
+            DB_USERNAME: smilepro
+            DB_PASSWORD: ${DB_PASSWORD:-smilepro_secret}
+            SESSION_DRIVER: database
+            CACHE_STORE: database
+            QUEUE_CONNECTION: database
+            SEED_ON_FIRST_RUN: "true"
+        volumes:
+            - smilepro_storage:/var/www/html/storage
 
-  db:
-    image: mariadb:11
-    container_name: smilepro-db
-    restart: unless-stopped
-    environment:
-      MARIADB_DATABASE: smilepro
-      MARIADB_USER: smilepro
-      MARIADB_PASSWORD: ${DB_PASSWORD:-smilepro_secret}
-      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-smilepro_root_secret}
-    volumes:
-      - smilepro_db:/var/lib/mysql
+    db:
+        image: mariadb:11
+        container_name: smilepro-db
+        restart: unless-stopped
+        environment:
+            MARIADB_DATABASE: smilepro
+            MARIADB_USER: smilepro
+            MARIADB_PASSWORD: ${DB_PASSWORD:-smilepro_secret}
+            MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-smilepro_root_secret}
+        volumes:
+            - smilepro_db:/var/lib/mysql
 
 volumes:
-  smilepro_storage:
-  smilepro_db:
+    smilepro_storage:
+    smilepro_db:
+
+networks:
+    npm_network:
+        external: true
+        name: npm_shared
