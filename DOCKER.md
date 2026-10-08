@@ -10,7 +10,7 @@ On the first start the app runs the migrations and seeds the demo data. On later
 ## Option A: Portainer, from the Git repository (recommended)
 
 1. Portainer → **Stacks** → **Add stack** → **Repository**.
-2. Repository URL: `https://github.com/NimrodLoozar/SmilePro`, reference: `refs/heads/<branch>` (the branch with these Docker files), compose path: `docker-compose.yml`.
+2. Repository URL: `https://github.com/NimrodLobozar/SmilePro`, reference: `refs/heads/<branch>` (the branch with these Docker files), compose path: `docker-compose.yml`.
 3. Under **Environment variables** add:
 
    | Name | Example |
@@ -25,7 +25,7 @@ On the first start the app runs the migrations and seeds the demo data. On later
 ## Option B: on the server via SSH
 
 ```bash
-git clone https://github.com/NimrodLoozar/SmilePro.git && cd SmilePro
+git clone https://github.com/NimrodLobozar/SmilePro.git && cd SmilePro
 git checkout <branch>
 DB_PASSWORD=change-me DB_ROOT_PASSWORD=change-me-too docker compose up -d --build
 ```

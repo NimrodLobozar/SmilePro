@@ -24,7 +24,7 @@ SmilePro is a web application for managing a dental practice, built as a school 
 Requirements: PHP 8.2+, Composer, Node.js and a MySQL/MariaDB server.
 
 ```bash
-git clone https://github.com/NimrodLoozar/SmilePro.git
+git clone https://github.com/NimrodLobozar/SmilePro.git
 cd SmilePro
 
 composer install
